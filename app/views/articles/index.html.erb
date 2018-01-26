@@ -1,0 +1,29 @@
+<h1>Your Homework</h1>
+ 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Remarks</th>
+    <th>Deadline</th>
+    <th>Group</th> 
+  </tr>
+ 
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.text %></td>
+      <td><%= article.deadline %></td>
+      <td><%= link_to Category.find(article.category_id).name, category_path(article.category_id) %></td>
+      <td><%= link_to 'Show', article_path(article) %> |</td>
+	<td><%= link_to 'Edit', edit_article_path(article) %> |</td>
+	<td><%= link_to 'Completed', article_path(article),
+              method: :delete,
+              data: { confirm: 'Are you sure? This will remove the task forever.' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<%= link_to 'Add New Homework', new_article_path %> |
+<%= link_to 'Create New Group', new_category_path %>
